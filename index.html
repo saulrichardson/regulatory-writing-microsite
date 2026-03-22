@@ -6,29 +6,43 @@
     <title>Agentic Regulatory Drafting</title>
     <meta
       name="description"
-      content="A leadership-facing microsite for the future of regulatory writing."
+      content="A product microsite for a governed regulatory writing system."
     />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23090909'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='24' font-weight='700' letter-spacing='2' fill='white'%3EARD%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230f0f10'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='24' font-weight='700' letter-spacing='2' fill='white'%3EARD%3C/text%3E%3C/svg%3E"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #f5f5f3;
-        --surface: rgba(255, 255, 255, 0.82);
-        --ink: #090909;
-        --muted: #4f4f4f;
-        --line: rgba(10, 10, 10, 0.12);
-        --line-strong: rgba(10, 10, 10, 0.22);
-        --accent: #7857ff;
-        --page-width: min(1280px, calc(100vw - 48px));
-        --section-pad: clamp(52px, 8vw, 112px);
+        --bg: #f4f2ed;
+        --surface: rgba(255, 255, 255, 0.7);
+        --surface-strong: rgba(255, 255, 255, 0.9);
+        --ink: #101010;
+        --muted: #585552;
+        --muted-soft: rgba(16, 16, 16, 0.66);
+        --line: rgba(16, 16, 16, 0.11);
+        --line-strong: rgba(16, 16, 16, 0.18);
+        --accent: #6d5cff;
+        --accent-soft: rgba(109, 92, 255, 0.12);
+        --shadow-lg: 0 30px 90px rgba(17, 17, 17, 0.08);
+        --shadow-md: 0 18px 48px rgba(17, 17, 17, 0.06);
+        --page-width: min(1400px, calc(100vw - 40px));
+        --content-width: min(1260px, calc(100vw - 40px));
+        --space-1: clamp(0.7rem, 1vw, 0.9rem);
+        --space-2: clamp(1rem, 1.3vw, 1.3rem);
+        --space-3: clamp(1.4rem, 1.8vw, 1.9rem);
+        --space-4: clamp(2rem, 3vw, 3rem);
+        --space-5: clamp(3rem, 4vw, 4.8rem);
+        --space-6: clamp(4.6rem, 7vw, 7rem);
+        --radius-lg: 32px;
+        --radius-md: 22px;
+        --radius-sm: 14px;
       }
 
       * {
@@ -42,12 +56,26 @@
       body {
         margin: 0;
         background:
-          radial-gradient(circle at top center, rgba(255, 255, 255, 0.96), transparent 34%),
-          radial-gradient(circle at 82% 14%, rgba(120, 87, 255, 0.08), transparent 18%),
+          radial-gradient(circle at 78% 10%, rgba(109, 92, 255, 0.1), transparent 24%),
+          radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.94), transparent 26%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0)),
           var(--bg);
         color: var(--ink);
-        font-family: "Inter", sans-serif;
+        font-family: "Manrope", sans-serif;
         min-width: 320px;
+      }
+
+      body::before {
+        background-image:
+          linear-gradient(rgba(16, 16, 16, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 16, 16, 0.025) 1px, transparent 1px);
+        background-size: 44px 44px;
+        content: "";
+        inset: 0;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.38), transparent 82%);
+        pointer-events: none;
+        position: fixed;
+        z-index: -1;
       }
 
       a {
@@ -59,639 +87,1271 @@
         font: inherit;
       }
 
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
       .site-shell {
         width: 100%;
       }
 
-      .site-header {
-        align-items: center;
-        backdrop-filter: blur(20px);
-        background: rgba(245, 245, 243, 0.82);
-        border-bottom: 1px solid var(--line);
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto;
-        padding: 1.15rem 1.3rem;
-        position: sticky;
-        top: 0;
+      .page {
+        overflow: clip;
         width: 100%;
-        z-index: 50;
       }
 
-      .brand {
-        align-items: center;
-        display: inline-flex;
-        gap: 0.9rem;
+      .section-frame {
+        margin: 0 auto;
+        max-width: var(--content-width);
       }
 
-      .brand-mark {
-        border: 1px solid var(--ink);
-        display: inline-flex;
-        font-size: 0.8rem;
+      .eyebrow,
+      .brand-name,
+      .metric-label,
+      .step-number,
+      .map-kicker,
+      .section-tag {
+        font-size: 0.76rem;
         font-weight: 700;
-        justify-content: center;
-        letter-spacing: 0.16em;
-        min-width: 52px;
-        padding: 0.55rem 0.6rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
       }
 
-      .brand-text,
-      .site-nav a,
-      .header-cta,
-      .button,
       .eyebrow,
-      .impact-label,
-      .process-number {
+      .section-tag,
+      .brand-name,
+      .map-kicker,
+      .step-number {
+        color: rgba(16, 16, 16, 0.58);
+      }
+
+      .hero {
+        padding: clamp(20px, 3vw, 30px) 0 var(--space-6);
+      }
+
+      .hero-frame {
+        margin: 0 auto;
+        max-width: var(--page-width);
+        padding: 0 clamp(14px, 2vw, 24px);
+      }
+
+      .hero-shell {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.68)),
+          rgba(255, 255, 255, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.66);
+        border-radius: 40px;
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-shell::before {
+        background:
+          radial-gradient(circle at 76% 16%, rgba(109, 92, 255, 0.18), transparent 22%),
+          linear-gradient(90deg, transparent, rgba(16, 16, 16, 0.035), transparent);
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .hero-top {
+        display: grid;
+        gap: var(--space-5);
+        padding: clamp(24px, 4vw, 38px);
+        position: relative;
+      }
+
+      .brand-row {
+        align-items: center;
+        display: inline-flex;
+        gap: 0.95rem;
+      }
+
+      .brand-mark {
+        align-items: center;
+        background: rgba(16, 16, 16, 0.03);
+        border: 1px solid rgba(16, 16, 16, 0.16);
+        border-radius: 12px;
+        display: inline-flex;
+        font-size: 0.88rem;
+        font-weight: 800;
+        height: 40px;
+        justify-content: center;
+        letter-spacing: 0.16em;
+        width: 56px;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: var(--space-3);
+        max-width: 58rem;
+      }
+
+      .hero-copy h1,
+      .section-heading h2,
+      .problem-heading,
+      .advantage-heading {
+        letter-spacing: -0.055em;
+        line-height: 0.96;
+        margin: 0;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(4rem, 9vw, 8rem);
+        font-weight: 800;
+        max-width: 10.8ch;
+      }
+
+      .hero-copy h1 em,
+      .section-heading h2 em,
+      .problem-heading em,
+      .advantage-heading em {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .hero-lede {
+        color: var(--muted-soft);
+        font-size: clamp(1.08rem, 1.4vw, 1.28rem);
+        line-height: 1.7;
+        margin: 0;
+        max-width: 48rem;
+      }
+
+      .hero-proof {
+        color: rgba(16, 16, 16, 0.62);
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 0.9rem;
+        font-weight: 700;
+        gap: 1rem;
+      }
+
+      .hero-proof span {
+        align-items: center;
+        display: inline-flex;
+        gap: 0.5rem;
+      }
+
+      .hero-proof span::before {
+        background: var(--accent);
+        border-radius: 999px;
+        content: "";
+        height: 6px;
+        width: 6px;
+      }
+
+      .hero-visual {
+        border-top: 1px solid var(--line);
+        padding: clamp(20px, 3vw, 30px) clamp(22px, 3vw, 32px)
+          clamp(24px, 3vw, 34px);
+        position: relative;
+      }
+
+      .hero-visual::before {
+        background:
+          linear-gradient(rgba(16, 16, 16, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 16, 16, 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        content: "";
+        inset: 0;
+        mask-image: radial-gradient(circle at center, black 48%, transparent 100%);
+        opacity: 0.75;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .visual-meta {
+        align-items: end;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        justify-content: space-between;
+        margin-bottom: 1.4rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .visual-meta p {
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.6;
+        margin: 0.25rem 0 0;
+        max-width: 40rem;
+      }
+
+      .visual-proof {
+        align-items: center;
+        color: var(--accent);
+        display: inline-flex;
+        font-size: 0.9rem;
+        font-weight: 800;
+        gap: 0.65rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .brand-text {
-        font-size: 0.78rem;
-        font-weight: 600;
+      .visual-proof::before {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 8px;
+        width: 8px;
       }
 
-      .site-nav {
-        display: inline-flex;
-        gap: 1.6rem;
-      }
-
-      .site-nav a {
-        font-size: 0.72rem;
-        font-weight: 500;
-      }
-
-      .header-cta {
-        background: #0a0a0a;
-        color: #fff;
-        font-size: 0.72rem;
-        font-weight: 600;
-        padding: 0.9rem 1.15rem;
-      }
-
-      main {
-        margin: 0 auto;
-        max-width: calc(var(--page-width) + 24px);
-        padding: 0 12px 48px;
-      }
-
-      .hero,
-      .editorial-section,
-      .close-section {
-        padding: var(--section-pad) clamp(20px, 3vw, 40px);
-      }
-
-      .hero {
-        padding-top: clamp(34px, 5vw, 72px);
-        padding-bottom: clamp(44px, 5vw, 84px);
-      }
-
-      .hero-grid,
-      .editorial-section {
+      .process-map {
         display: grid;
-        gap: clamp(1.6rem, 4vw, 4rem);
+        gap: 1rem;
+        grid-template-columns: minmax(0, 1.1fr) repeat(4, minmax(0, 1fr)) minmax(0, 1.1fr);
+        position: relative;
+        z-index: 1;
       }
 
-      .hero-grid {
-        align-items: start;
-        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.82fr);
+      .process-map::before {
+        background: linear-gradient(90deg, rgba(109, 92, 255, 0.34), rgba(16, 16, 16, 0.18));
+        content: "";
+        height: 1px;
+        left: 16%;
+        position: absolute;
+        right: 16%;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
-      .hero-copy,
-      .hero-body,
-      .hero-details,
-      .section-body,
-      .close-shell {
+      .map-column,
+      .map-stage {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        min-height: 100%;
+        position: relative;
+      }
+
+      .map-column {
         display: grid;
-        gap: 1.25rem;
+        gap: 0.8rem;
+        padding: 1.15rem;
       }
 
-      .eyebrow,
-      .impact-label,
-      .process-number {
-        color: rgba(10, 10, 10, 0.62);
-        font-size: 0.72rem;
-        font-weight: 600;
+      .map-node {
+        background: rgba(255, 255, 255, 0.74);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        color: var(--ink);
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.45;
+        padding: 0.9rem 1rem;
+        position: relative;
       }
 
-      .hero h1,
-      .section-heading-block h2,
-      .process-list h3,
-      .close-shell h2 {
-        font-family: "Bodoni Moda", serif;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        line-height: 0.92;
+      .map-node strong,
+      .map-stage strong {
+        display: block;
+        font-size: 0.88rem;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.3rem;
+      }
+
+      .map-node-highlight {
+        background: rgba(109, 92, 255, 0.1);
+        border-color: rgba(109, 92, 255, 0.22);
+      }
+
+      .map-stage {
+        display: grid;
+        gap: 0.7rem;
+        padding: 1.15rem 1.05rem 1.1rem;
+      }
+
+      .map-stage::after {
+        background: linear-gradient(90deg, var(--accent), transparent);
+        content: "";
+        height: 1px;
+        position: absolute;
+        right: -1rem;
+        top: calc(50% - 0.5px);
+        width: 1rem;
+      }
+
+      .map-stage:last-of-type::after {
+        display: none;
+      }
+
+      .map-stage-accent {
+        background:
+          linear-gradient(180deg, rgba(109, 92, 255, 0.1), rgba(109, 92, 255, 0.04)),
+          rgba(255, 255, 255, 0.72);
+      }
+
+      .map-stage h3 {
+        font-size: 1.05rem;
+        letter-spacing: -0.03em;
+        line-height: 1.12;
         margin: 0;
       }
 
-      .hero h1 {
-        font-size: clamp(4.3rem, 8vw, 7.2rem);
+      .map-stage p,
+      .map-column p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      .step-number {
+        color: var(--accent);
+      }
+
+      .section {
+        padding: var(--space-6) 0;
+      }
+
+      .section-intro,
+      .problem-grid,
+      .advantage-grid,
+      .leadership-grid {
+        display: grid;
+        gap: var(--space-4);
+      }
+
+      .section-intro {
+        margin-bottom: clamp(1.8rem, 3vw, 2.8rem);
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 1rem;
+        max-width: 58rem;
+      }
+
+      .section-heading h2,
+      .problem-heading,
+      .advantage-heading {
+        font-size: clamp(2.6rem, 5.2vw, 5rem);
+        font-weight: 800;
+        max-width: 12ch;
+      }
+
+      .section-heading p,
+      .problem-summary,
+      .advantage-summary,
+      .coverage-copy p,
+      .leadership-copy p,
+      .value-item p,
+      .point-list p {
+        color: var(--muted);
+        font-size: 1.04rem;
+        line-height: 1.75;
+        margin: 0;
+      }
+
+      .problem-grid {
+        align-items: start;
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      }
+
+      .problem-copy {
+        display: grid;
+        gap: 1.3rem;
+      }
+
+      .problem-heading {
         max-width: 10ch;
       }
 
-      .hero-summary,
-      .section-body > p,
-      .body-lines p,
-      .process-list p,
-      .coverage-list li,
-      .impact-line p,
-      .close-shell p {
+      .point-list {
+        display: grid;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      .point-list article {
+        border-top: 1px solid var(--line);
+        padding: 1.1rem 0 1.15rem;
+      }
+
+      .point-list strong {
+        color: var(--ink);
+      }
+
+      .process-section .section-heading h2,
+      .coverage-section .section-heading h2,
+      .leadership-section .section-heading h2 {
+        max-width: 13ch;
+      }
+
+      .coverage-section .section-heading h2,
+      .leadership-section .section-heading h2 {
+        font-size: clamp(2.3rem, 4.2vw, 4.25rem);
+        line-height: 0.98;
+      }
+
+      .value-grid {
+        display: grid;
+        gap: 1.4rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .value-item {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(255, 255, 255, 0.46)),
+          rgba(255, 255, 255, 0.42);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: 24px;
+        box-shadow: var(--shadow-md);
+        display: grid;
+        gap: 0.95rem;
+        min-height: 100%;
+        padding: 1.5rem 1.4rem;
+      }
+
+      .value-item h3 {
+        font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+        letter-spacing: -0.04em;
+        line-height: 1.15;
+        margin: 0;
+      }
+
+      .value-item .step-number {
+        font-size: 0.72rem;
+      }
+
+      .advantage-panel,
+      .scope-panel,
+      .leadership-panel {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.58)),
+          rgba(255, 255, 255, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: calc(var(--radius-lg) + 2px);
+        box-shadow: var(--shadow-md);
+        padding: clamp(22px, 3vw, 34px);
+      }
+
+      .advantage-grid {
+        align-items: start;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      }
+
+      .advantage-copy,
+      .coverage-copy,
+      .leadership-copy {
+        display: grid;
+        gap: 1.15rem;
+      }
+
+      .advantage-heading {
+        max-width: 9ch;
+      }
+
+      .advantage-list,
+      .scope-list {
+        display: grid;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .advantage-list li,
+      .scope-list li {
+        border-top: 1px solid var(--line);
+        font-size: 1.02rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.5;
+        padding: 1rem 0 1.1rem;
+      }
+
+      .example-section {
+        padding-top: clamp(2.8rem, 4.5vw, 4.2rem);
+      }
+
+      .example-shell {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: clamp(1.6rem, 3vw, 2.4rem);
+        padding-top: clamp(1.4rem, 2.8vw, 2.2rem);
+      }
+
+      .example-intro {
+        display: grid;
+        gap: 1rem;
+        max-width: 60rem;
+      }
+
+      .example-intro h2 {
+        font-size: clamp(2.1rem, 3.8vw, 3.35rem);
+        line-height: 1.02;
+        margin: 0;
+        max-width: 12ch;
+      }
+
+      .example-intro p {
         color: var(--muted);
         font-size: 1.04rem;
         line-height: 1.72;
         margin: 0;
+        max-width: 44rem;
       }
 
-      .hero-summary {
-        color: var(--ink);
-        font-size: 1.34rem;
-        font-weight: 600;
-        max-width: 26ch;
-      }
-
-      .hero-subsummary {
-        color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.8;
-        margin: 0;
-        max-width: 48ch;
-      }
-
-      .hero-body {
-        align-content: end;
-      }
-
-      .hero-aside {
+      .example-grid {
         display: grid;
         gap: 1rem;
       }
 
-      .hero-note {
-        border-top: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.72;
+      .example-lane {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.44)),
+          rgba(255, 255, 255, 0.48);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: calc(var(--radius-md) + 4px);
+        box-shadow: var(--shadow-md);
+        display: grid;
+        gap: 1.15rem;
+        padding: clamp(18px, 2.4vw, 24px);
+      }
+
+      .example-header {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .example-title {
+        font-size: clamp(1.3rem, 1.8vw, 1.75rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
         margin: 0;
-        padding-top: 1rem;
       }
 
-      .hero-note-strong {
-        color: var(--ink);
-        font-size: 1.24rem;
-        font-weight: 600;
-        line-height: 1.5;
-      }
-
-      .hero-actions {
+      .example-rule-row {
+        align-items: center;
         display: flex;
         flex-wrap: wrap;
-        gap: 0.9rem;
+        gap: 0.7rem 0.8rem;
       }
 
-      .button {
-        align-items: center;
-        border: 1px solid var(--ink);
-        display: inline-flex;
-        font-size: 0.74rem;
-        font-weight: 600;
-        justify-content: center;
-        min-height: 48px;
-        padding: 0.95rem 1.2rem;
-      }
-
-      .button-primary {
-        background: #0a0a0a;
-        color: #fff;
-      }
-
-      .button-secondary {
-        background: transparent;
-        color: var(--ink);
-      }
-
-      .editorial-section {
-        border-top: 1px solid var(--line);
-        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.9fr);
-      }
-
-      .section-heading-block {
-        display: grid;
-        gap: 0.9rem;
-      }
-
-      .section-heading-block h2 {
-        font-size: clamp(3rem, 6vw, 5.2rem);
-        max-width: 10ch;
-      }
-
-      .section-body {
-        align-content: start;
-        max-width: 46rem;
-      }
-
-      .body-lines,
-      .coverage-list,
-      .impact-lines {
-        display: grid;
-        gap: 0;
-        margin: 0;
-        padding: 0;
-      }
-
-      .body-lines p,
-      .coverage-list li,
-      .impact-line {
-        border-top: 1px solid var(--line);
-        padding-top: 1rem;
-      }
-
-      .body-lines strong,
-      .process-list strong,
-      .coverage-list strong,
-      .impact-line strong {
-        color: var(--ink);
-      }
-
-      .process-list {
-        display: grid;
-        gap: 0;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .process-list li {
-        border-top: 1px solid var(--line);
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 84px minmax(0, 1fr);
-        padding: 1.2rem 0 1.3rem;
-      }
-
-      .process-number {
+      .example-rule-label {
+        color: rgba(16, 16, 16, 0.54);
+        font-size: 0.7rem;
         font-weight: 700;
-        padding-top: 0.25rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
       }
 
-      .process-list h3 {
-        font-size: clamp(1.85rem, 3vw, 2.5rem);
-        margin-bottom: 0.45rem;
-      }
-
-      .coverage-list {
-        list-style: none;
-      }
-
-      .coverage-list li {
-        color: var(--ink);
-        font-family: "Bodoni Moda", serif;
-        font-size: clamp(1.6rem, 2.6vw, 2.3rem);
-        letter-spacing: -0.03em;
-        line-height: 1.08;
-        padding-bottom: 0.1rem;
-      }
-
-      .impact-lines {
-        gap: 1.2rem;
-      }
-
-      .impact-line {
-        display: grid;
+      .example-rule-tags {
+        display: flex;
+        flex-wrap: wrap;
         gap: 0.55rem;
       }
 
-      .impact-label {
+      .example-rule-tag {
+        background: rgba(109, 92, 255, 0.1);
+        border: 1px solid rgba(109, 92, 255, 0.18);
+        border-radius: 999px;
         color: var(--accent);
+        display: inline-flex;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        line-height: 1;
+        padding: 0.68rem 0.9rem;
+        text-transform: uppercase;
+      }
+
+      .example-flow {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        position: relative;
+      }
+
+      .example-flow::before,
+      .example-flow::after {
+        background: linear-gradient(90deg, rgba(109, 92, 255, 0.32), rgba(16, 16, 16, 0.12));
+        content: "";
+        height: 1px;
+        position: absolute;
+        top: calc(50% - 0.5px);
+        width: calc(33.333% - 0.5rem);
+      }
+
+      .example-flow::before {
+        left: calc(16.666% + 0.5rem);
+      }
+
+      .example-flow::after {
+        right: calc(16.666% + 0.5rem);
+      }
+
+      .example-node {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.82);
+        border-radius: 20px;
+        box-shadow: var(--shadow-md);
+        display: grid;
+        gap: 0.65rem;
+        min-height: 100%;
+        padding: 1rem 1rem 1.05rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .example-node-label {
+        color: rgba(16, 16, 16, 0.54);
+        font-size: 0.7rem;
         font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
       }
 
-      .close-section {
-        padding-top: 0;
+      .example-node strong {
+        display: block;
+        font-size: 1rem;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
       }
 
-      .close-shell {
-        background:
-          radial-gradient(circle at top center, rgba(120, 87, 255, 0.2), transparent 26%),
-          #090909;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        color: #fff;
-        min-height: 360px;
-        padding: clamp(32px, 5vw, 64px);
+      .example-node p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0;
       }
 
-      .close-shell .eyebrow,
-      .close-shell p {
-        color: rgba(255, 255, 255, 0.74);
+      .scope-list li {
+        color: var(--muted-soft);
+        font-weight: 600;
       }
 
-      .close-shell h2 {
-        color: #fff;
-        font-size: clamp(3.2rem, 6vw, 5.4rem);
-        max-width: 10ch;
+      .scope-list li strong {
+        color: var(--ink);
       }
 
-      .reveal,
+      .leadership-grid {
+        gap: 1.4rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .leadership-card {
+        border-top: 1px solid var(--line-strong);
+        display: grid;
+        gap: 0.8rem;
+        padding-top: 1.2rem;
+      }
+
+      .leadership-card strong {
+        font-size: clamp(2.1rem, 3vw, 3.2rem);
+        letter-spacing: -0.06em;
+        line-height: 1;
+      }
+
+      .metric-label {
+        color: var(--accent);
+      }
+
+      .section-divider {
+        border-top: 1px solid var(--line);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
       .reveal.is-visible {
         opacity: 1;
         transform: none;
       }
 
-      @media (max-width: 1120px) {
-        .hero-grid,
-        .editorial-section {
-          grid-template-columns: 1fr;
+      .hero-shell .reveal,
+      .hero-shell .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      body.is-ready .process-map::before {
+        animation: flowIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+      }
+
+      body.is-ready .map-stage,
+      body.is-ready .map-column {
+        animation: riseIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      body.is-ready .map-stage:nth-child(2) {
+        animation-delay: 130ms;
+      }
+
+      body.is-ready .map-stage:nth-child(3) {
+        animation-delay: 220ms;
+      }
+
+      body.is-ready .map-stage:nth-child(4) {
+        animation-delay: 310ms;
+      }
+
+      body.is-ready .map-stage:nth-child(5) {
+        animation-delay: 400ms;
+      }
+
+      body.is-ready .map-column:first-child {
+        animation-delay: 60ms;
+      }
+
+      body.is-ready .map-column:last-child {
+        animation-delay: 500ms;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
 
-        .section-heading-block h2 {
-          max-width: none;
-        }
-
-        .hero-copy {
-          max-width: 980px;
+        to {
+          opacity: 1;
+          transform: none;
         }
       }
 
-      @media (max-width: 820px) {
-        .site-header {
-          gap: 1rem;
-          padding-inline: 1rem;
+      @keyframes flowIn {
+        from {
+          opacity: 0;
+          transform: scaleX(0.6);
+          transform-origin: left center;
         }
 
-        .site-nav,
-        .brand-text {
-          display: none;
+        to {
+          opacity: 1;
+          transform: scaleX(1);
         }
+      }
 
-        main {
-          padding-inline: 8px;
-        }
-
-        .hero h1 {
-          font-size: clamp(3.5rem, 16vw, 5.3rem);
-        }
-
-        .section-heading-block h2,
-        .close-shell h2 {
-          font-size: clamp(2.5rem, 10vw, 3.9rem);
-        }
-
-        .process-list li {
+      @media (max-width: 1180px) {
+        .problem-grid,
+        .advantage-grid,
+        .leadership-grid {
           grid-template-columns: 1fr;
         }
 
-        .header-cta {
-          white-space: nowrap;
+        .example-flow {
+          grid-template-columns: 1fr;
+        }
+
+        .example-flow::before,
+        .example-flow::after {
+          display: none;
+        }
+
+        .process-map {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .process-map::before {
+          display: none;
+        }
+
+        .map-stage::after {
+          display: none;
+        }
+
+        .value-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 780px) {
+        .hero {
+          padding-bottom: var(--space-5);
+        }
+
+        .hero-frame {
+          padding-inline: 10px;
+        }
+
+        .hero-shell {
+          border-radius: 26px;
+        }
+
+        .hero-top {
+          gap: var(--space-4);
+          padding: 20px;
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(3.1rem, 16vw, 4.6rem);
+          max-width: 9.8ch;
+        }
+
+        .hero-visual {
+          padding: 18px;
+        }
+
+        .process-map {
+          grid-template-columns: 1fr;
+        }
+
+        .value-grid,
+        .example-flow,
+        .leadership-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section {
+          padding: var(--space-5) 0;
+        }
+
+        .section-heading h2,
+        .problem-heading,
+        .advantage-heading {
+          font-size: clamp(2.3rem, 12vw, 3.5rem);
+          max-width: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
         }
       }
     </style>
   </head>
   <body>
     <div class="site-shell">
-      <header class="site-header">
-        <a class="brand" href="#top" aria-label="Agentic Regulatory Drafting home">
-          <span class="brand-mark">ARD</span>
-          <span class="brand-text">Agentic Regulatory Drafting</span>
-        </a>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="#process">Writing Process</a>
-          <a href="#advantage">KPMG Advantage</a>
-          <a href="#leadership">Leadership</a>
-        </nav>
-        <a class="header-cta" href="#process">Read the Narrative</a>
-      </header>
+      <main class="page" id="top">
+        <section class="hero">
+          <div class="hero-frame">
+            <div class="hero-shell">
+              <div class="hero-top">
+                <div class="brand-row reveal">
+                  <span class="brand-mark">ARD</span>
+                  <span class="brand-name">Agentic Regulatory Drafting</span>
+                </div>
 
-      <main id="top">
-        <section class="hero reveal">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="eyebrow">The future of regulatory writing</p>
-              <h1>A Platform for the Full Regulatory Writing Process</h1>
-            </div>
-
-            <div class="hero-body">
-              <div class="hero-details">
-                <p class="hero-summary">
-                  Read the rule, understand the institution, benchmark against prior
-                  KPMG work, draft the narrative, and show what is still missing.
-                </p>
-                <p class="hero-subsummary">
-                  This is not a narrow point solution for producing a final
-                  deliverable. It is a governed operating capability for turning
-                  fragmented regulation, evidence, and institutional reality into
-                  defensible regulatory writing.
-                </p>
-                <div class="hero-actions">
-                  <a class="button button-primary" href="#process">Read the narrative</a>
-                  <a class="button button-secondary" href="#advantage">See the KPMG advantage</a>
+                <div class="hero-copy reveal">
+                  <p class="eyebrow">Governed Regulatory Writing</p>
+                  <h1>
+                    Turn regulatory sprawl into a
+                    <em>benchmarked first draft</em>.
+                  </h1>
+                  <p class="hero-lede">
+                    ARD compiles the rule, maps institutional evidence, applies
+                    prior KPMG precedent, and produces a benchmarked draft with
+                    an explicit gap view before formal review begins.
+                  </p>
+                  <div class="hero-proof">
+                    <span>~1 hour to first draft</span>
+                    <span>Reusable benchmark intelligence</span>
+                    <span>Gap view before review</span>
+                  </div>
                 </div>
               </div>
 
-              <aside class="hero-aside" aria-label="Narrative highlights">
-                <p class="hero-note hero-note-strong">
-                  From hundreds of documents to a benchmarked first draft and gap view
-                  in about an hour.
-                </p>
-                <p class="hero-note">
-                  Prior KPMG deliverables become reusable benchmark intelligence rather
-                  than one-off work product.
-                </p>
-                <p class="hero-note">
-                  Teams spend less time assembling narrative and more time making the
-                  judgment calls that matter.
-                </p>
-              </aside>
+              <div class="hero-visual reveal">
+                <div class="visual-meta">
+                  <div>
+                    <span class="map-kicker">Operating Map</span>
+                    <p>
+                      One governed trace from governing source to benchmarked
+                      draft, explicit gap view, and downstream review artifacts.
+                    </p>
+                  </div>
+                  <span class="visual-proof">Source to narrative flow</span>
+                </div>
+
+                <div
+                  class="process-map"
+                  aria-label="Architecture diagram of the end-to-end regulatory writing process"
+                >
+                  <div class="map-column">
+                    <span class="map-kicker">Inputs</span>
+                    <div class="map-node">
+                      <strong>Governing sources</strong>
+                      Rules, guidance, and policy obligations.
+                    </div>
+                    <div class="map-node">
+                      <strong>Institutional evidence</strong>
+                      Policies, controls, records, minutes, and runbooks.
+                    </div>
+                    <div class="map-node">
+                      <strong>Prior KPMG deliverables</strong>
+                      Narratives, working papers, and review patterns.
+                    </div>
+                  </div>
+
+                  <article class="map-stage">
+                    <span class="step-number">01</span>
+                    <h3>Requirement compiler</h3>
+                    <p>
+                      Turns rules into writing obligations, evidence asks, and
+                      section targets.
+                    </p>
+                  </article>
+
+                  <article class="map-stage">
+                    <span class="step-number">02</span>
+                    <h3>Evidence map</h3>
+                    <p>
+                      Connects claims to institutional evidence and documentary
+                      context before drafting begins.
+                    </p>
+                  </article>
+
+                  <article class="map-stage map-stage-accent">
+                    <span class="step-number">03</span>
+                    <h3>Benchmark engine</h3>
+                    <p>
+                      Applies reusable KPMG narrative patterns and learned
+                      review expectations.
+                    </p>
+                  </article>
+
+                  <article class="map-stage">
+                    <span class="step-number">04</span>
+                    <h3>Narrative workspace</h3>
+                    <p>
+                      Produces the draft while surfacing missing evidence and
+                      open judgment calls.
+                    </p>
+                  </article>
+
+                  <div class="map-column">
+                    <span class="map-kicker">Outputs</span>
+                    <div class="map-node map-node-highlight">
+                      <strong>Benchmarked first draft</strong>
+                      Starting narrative shaped against prior work.
+                    </div>
+                    <div class="map-node map-node-highlight">
+                      <strong>Explicit gap view</strong>
+                      Missing evidence and judgment surfaced early.
+                    </div>
+                    <div class="map-node map-node-highlight">
+                      <strong>Review artifacts</strong>
+                      Artifacts for leadership and regulatory review in one
+                      place.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="editorial-section reveal" id="problem">
-          <div class="section-heading-block">
-            <p class="eyebrow">Why Writing</p>
-            <h2>The bottleneck is not reading the rule. It is writing the institutional story.</h2>
-          </div>
-
-          <div class="section-body">
-            <p>
-              Regulatory writing is where rules, evidence, institutional reality, and
-              review expectations collide. The rule may be stable. The institution is
-              not.
-            </p>
-
-            <div class="body-lines">
-              <p>
-                <strong>Rules do not arrive as finished narrative.</strong>
-                Teams still have to convert requirements into a coherent story.
-              </p>
-              <p>
-                <strong>Evidence lives across the institution.</strong>
-                Policies, controls, minutes, runbooks, MIS, and prior drafts rarely
-                line up cleanly on their own.
-              </p>
-              <p>
-                <strong>Gaps surface late.</strong>
-                Unsupported claims and unresolved judgments often appear only after a
-                large amount of manual writing effort.
+        <section class="section section-divider reveal" id="problem">
+          <div class="section-frame problem-grid">
+            <div class="problem-copy">
+              <p class="eyebrow">Why Teams Stall</p>
+              <h2 class="problem-heading">
+                The bottleneck is stitching rules, evidence, and institutional
+                reality into a defensible <em>story</em>.
+              </h2>
+              <p class="problem-summary">
+                Regulatory writing still breaks down because the narrative has
+                to be rebuilt by hand from scattered sources every time the
+                institution changes.
               </p>
             </div>
-          </div>
-        </section>
 
-        <section class="editorial-section reveal" id="process">
-          <div class="section-heading-block">
-            <p class="eyebrow">Writing Process</p>
-            <h2>One governed writing process, end to end.</h2>
-          </div>
-
-          <div class="section-body">
-            <ol class="process-list">
-              <li>
-                <span class="process-number">01</span>
-                <div>
-                  <h3>Read the rule and compile the requirement</h3>
-                  <p>
-                    Turn governing sources into clear writing obligations, expected
-                    evidence, and destinations in the narrative.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span class="process-number">02</span>
-                <div>
-                  <h3>Understand the institution and evidence base</h3>
-                  <p>
-                    Build a grounded picture of the institution from policies,
-                    controls, records, operating evidence, and documentary context.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span class="process-number">03</span>
-                <div>
-                  <h3>Benchmark against prior KPMG deliverables</h3>
-                  <p>
-                    Bring forward strong prior work product, reusable narrative
-                    patterns, and learned review expectations as benchmark
-                    intelligence.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <span class="process-number">04</span>
-                <div>
-                  <h3>Draft the narrative and show what is still missing</h3>
-                  <p>
-                    Produce the first draft, carry forward explicit uncertainty, and
-                    surface the gaps and judgment calls that still need attention.
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </section>
-
-        <section class="editorial-section reveal" id="advantage">
-          <div class="section-heading-block">
-            <p class="eyebrow">KPMG Advantage</p>
-            <h2>KPMG precedent turns writing into a compounding capability.</h2>
-          </div>
-
-          <div class="section-body">
-            <p>
-              What makes this more than a generic drafting platform is the ability to
-              draw on prior KPMG deliverables as benchmark intelligence.
-            </p>
-
-            <div class="body-lines">
-              <p>
-                <strong>Prior deliverables become precedent.</strong>
-                Existing narratives, working papers, and review structures become
-                reusable patterns instead of archived artifacts.
-              </p>
-              <p>
-                <strong>Benchmarking becomes part of the writing process.</strong>
-                Drafts can be shaped against what strong work has looked like before,
-                not just against abstract rules.
-              </p>
-              <p>
-                <strong>Institutional memory compounds.</strong>
-                Each cycle strengthens the firm’s ability to produce defensible
-                writing faster and with clearer visibility into what still needs
-                judgment.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section class="editorial-section reveal" id="coverage">
-          <div class="section-heading-block">
-            <p class="eyebrow">Where It Starts</p>
-            <h2>Resolution plans are the first proof point, not the limit.</h2>
-          </div>
-
-          <div class="section-body">
-            <p>
-              The same writing process applies anywhere the task is to turn scattered
-              institutional reality into defensible regulatory narrative.
-            </p>
-
-            <ul class="coverage-list">
-              <li>Resolution plans and living-will chapters</li>
-              <li>Supervisory response packages</li>
-              <li>Remediation narratives</li>
-              <li>Governance and control writeups</li>
-            </ul>
-          </div>
-        </section>
-
-        <section class="editorial-section reveal" id="leadership">
-          <div class="section-heading-block">
-            <p class="eyebrow">Leadership</p>
-            <h2>What leadership gets is speed, reuse, and visibility.</h2>
-          </div>
-
-          <div class="section-body">
-            <div class="impact-lines">
-              <div class="impact-line">
-                <span class="impact-label">~1 hour</span>
+            <div class="point-list">
+              <article>
                 <p>
-                  to a benchmarked first draft and explicit gap view across hundreds
-                  of documents.
+                  <strong>Rules do not arrive in narrative form.</strong> They
+                  have to be compiled into writing obligations, evidence asks,
+                  and destinations in the document.
                 </p>
-              </div>
-              <div class="impact-line">
-                <span class="impact-label">KPMG reuse</span>
+              </article>
+              <article>
                 <p>
-                  turns prior deliverables into repeatable benchmark intelligence
-                  instead of one-off work product.
+                  <strong>Evidence is institution-wide.</strong> Policies,
+                  controls, minutes, runbooks, MIS, and prior drafts rarely line
+                  up cleanly on their own.
                 </p>
-              </div>
-              <div class="impact-line">
-                <span class="impact-label">1 view</span>
+              </article>
+              <article>
                 <p>
-                  gives leadership direct visibility into narrative strength,
-                  precedent alignment, and what still needs human judgment.
+                  <strong>Gaps appear too late.</strong> Unsupported claims and
+                  unresolved judgments often surface after too much drafting
+                  effort has already been spent.
                 </p>
-              </div>
+              </article>
             </div>
           </div>
         </section>
 
-        <section class="close-section reveal">
-          <div class="close-shell">
-            <p class="eyebrow">The pitch</p>
-            <h2>Regulatory writing becomes a governed operating capability.</h2>
-            <p>
-              The strategic value is not just faster drafting. It is a reusable way
-              to read the rule, understand the institution, benchmark against prior
-              KPMG work, and produce defensible writing with clear visibility into
-              what is still missing.
-            </p>
+        <section class="section process-section reveal" id="process">
+          <div class="section-frame">
+            <div class="section-intro">
+              <div class="section-heading">
+                <p class="eyebrow">What Changes</p>
+                <h2>
+                  The draft is built from traceability, precedent, and visible
+                  <em>gaps</em>, not reconstructed from memory.
+                </h2>
+                <p>
+                  The operating difference is not speed alone. It is that every
+                  draft is grounded in compiled obligations, institutional
+                  evidence, and reusable precedent while unsettled issues remain
+                  explicit in the same workspace.
+                </p>
+              </div>
+            </div>
+
+            <div class="value-grid">
+              <article class="value-item">
+                <span class="step-number">01</span>
+                <h3>Governed traceability</h3>
+                <p>
+                  The draft starts from compiled obligations and mapped evidence
+                  instead of relying on whoever remembers the source material
+                  best.
+                </p>
+              </article>
+              <article class="value-item">
+                <span class="step-number">02</span>
+                <h3>Active benchmark intelligence</h3>
+                <p>
+                  Prior KPMG deliverables shape the draft in flow, so strong
+                  narrative patterns and review expectations carry forward.
+                </p>
+              </article>
+              <article class="value-item">
+                <span class="step-number">03</span>
+                <h3>Explicit uncertainty</h3>
+                <p>
+                  Missing support and open judgment calls stay visible while the
+                  narrative is being built, not only after a late review pass.
+                </p>
+              </article>
+            </div>
           </div>
         </section>
 
+        <section class="section reveal" id="advantage">
+          <div class="section-frame advantage-panel">
+            <div class="advantage-grid">
+              <div class="advantage-copy">
+                <p class="eyebrow">KPMG Advantage</p>
+                <h2 class="advantage-heading">
+                  Precedent becomes an active <em>benchmark</em>, not a static
+                  archive.
+                </h2>
+                <p class="advantage-summary">
+                  Prior KPMG deliverables, working papers, and learned review
+                  patterns shape the next draft from the start, so the process
+                  compounds instead of resetting each cycle.
+                </p>
+              </div>
+
+              <ul class="advantage-list">
+                <li>Reusable narrative patterns carry forward.</li>
+                <li>Review expectations become visible earlier.</li>
+                <li>Institutional memory compounds across engagements.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section example-section reveal" id="examples">
+          <div class="section-frame example-shell">
+            <div class="example-intro">
+              <p class="eyebrow">Example Flows</p>
+              <h2>
+                A few concrete writing jobs, shown from
+                <em>rule set</em> to written output.
+              </h2>
+              <p>
+                The same operating model can be pointed at different regulatory
+                requirements. Each lane below shows the governing source, the
+                institutional material that has to be assembled, and the written
+                artifact that comes out.
+              </p>
+            </div>
+
+            <div class="example-grid">
+              <article class="example-lane">
+                <div class="example-header">
+                  <h3 class="example-title">Resolution planning chapter update</h3>
+                  <div class="example-rule-row">
+                    <span class="example-rule-label">Relevant rule sets</span>
+                    <div class="example-rule-tags">
+                      <span class="example-rule-tag">12 CFR Part 243</span>
+                      <span class="example-rule-tag">12 CFR Part 381</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="example-flow">
+                  <div class="example-node">
+                    <span class="example-node-label">Rule Set</span>
+                    <strong>Resolution plan requirements</strong>
+                    <p>Plan structure, required capabilities, and supporting guidance.</p>
+                  </div>
+                  <div class="example-node">
+                    <span class="example-node-label">Institutional Inputs</span>
+                    <strong>Entity, capability, and governance materials</strong>
+                    <p>Legal entity structure, capabilities, playbooks, MIS, and governance records.</p>
+                  </div>
+                  <div class="example-node">
+                    <span class="example-node-label">Written Output</span>
+                    <strong>Living-will chapter draft</strong>
+                    <p>Benchmarked chapter language plus an explicit gap log for open support.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="example-lane">
+                <div class="example-header">
+                  <h3 class="example-title">Capital planning narrative package</h3>
+                  <div class="example-rule-row">
+                    <span class="example-rule-label">Relevant rule sets</span>
+                    <div class="example-rule-tags">
+                      <span class="example-rule-tag">FR Y-14A</span>
+                      <span class="example-rule-tag">Capital Planning Guidance</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="example-flow">
+                  <div class="example-node">
+                    <span class="example-node-label">Rule Set</span>
+                    <strong>Capital planning requirements</strong>
+                    <p>Scenario design, methodology expectations, and supporting report instructions.</p>
+                  </div>
+                  <div class="example-node">
+                    <span class="example-node-label">Institutional Inputs</span>
+                    <strong>Forecasts, models, and approvals</strong>
+                    <p>Scenario assumptions, loss methodologies, capital actions, and approval records.</p>
+                  </div>
+                  <div class="example-node">
+                    <span class="example-node-label">Written Output</span>
+                    <strong>Methodology narrative and support package</strong>
+                    <p>Submission-ready writeup with benchmarked language and visible open judgments.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="example-lane">
+                <div class="example-header">
+                  <h3 class="example-title">Risk governance writeup</h3>
+                  <div class="example-rule-row">
+                    <span class="example-rule-label">Relevant rule sets</span>
+                    <div class="example-rule-tags">
+                      <span class="example-rule-tag">12 CFR Part 30</span>
+                      <span class="example-rule-tag">Appendix D</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="example-flow">
+                  <div class="example-node">
+                    <span class="example-node-label">Rule Set</span>
+                    <strong>Heightened standards for governance</strong>
+                    <p>Risk governance expectations, role clarity, and board oversight requirements.</p>
+                  </div>
+                  <div class="example-node">
+                    <span class="example-node-label">Institutional Inputs</span>
+                    <strong>Charters, minutes, and issue inventory</strong>
+                    <p>Committee materials, decision records, issue logs, policies, and control evidence.</p>
+                  </div>
+                  <div class="example-node">
+                    <span class="example-node-label">Written Output</span>
+                    <strong>Governance narrative and response memo</strong>
+                    <p>Coherent writeup of the control environment with the remaining gaps made explicit.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section leadership-section reveal" id="leadership">
+          <div class="section-frame leadership-panel">
+            <div class="leadership-copy">
+              <p class="eyebrow">What It Delivers</p>
+              <div class="section-heading">
+                <h2>
+                  A faster starting draft, stronger reuse, and clearer
+                  visibility into open <em>judgment</em>.
+                </h2>
+                <p>
+                  The output is not just a draft. It is a benchmarked starting
+                  point, a reusable precedent base, and a set of review artifacts
+                  that make unsettled issues visible before they become late
+                  cycle surprises.
+                </p>
+              </div>
+            </div>
+
+            <div class="leadership-grid">
+              <article class="leadership-card">
+                <span class="metric-label">Draft speed</span>
+                <strong>~1 hour</strong>
+                <p>
+                  to assemble a benchmarked first draft and explicit gap view
+                  across hundreds of documents.
+                </p>
+              </article>
+              <article class="leadership-card">
+                <span class="metric-label">Precedent reuse</span>
+                <strong>Compounding</strong>
+                <p>
+                  benchmark intelligence from prior KPMG deliverables rather than
+                  one-off work product.
+                </p>
+              </article>
+              <article class="leadership-card">
+                <span class="metric-label">Review visibility</span>
+                <strong>One view</strong>
+                <p>
+                  into narrative strength, precedent alignment, and the points
+                  that still need judgment.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
+
+    <script>
+      const revealNodes = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.16 }
+      );
+
+      revealNodes.forEach((node) => {
+        revealObserver.observe(node);
+      });
+
+      window.requestAnimationFrame(() => {
+        document.body.classList.add("is-ready");
+      });
+    </script>
   </body>
 </html>
